@@ -3,11 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Subway Surfers 2D</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.min.js"></script>
+    <title>Indranil Crazy Games - Login</title>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://*.google.com https://*.googleapis.com https://*.googlesyndication.com https://*.gstatic.com; script-src 'self' 'unsafe-inline' https://*.googlesyndication.com https://*.google-analytics.com https://*.googletagmanager.com; style-src 'self' 'unsafe-inline' https://*.googleapis.com; img-src 'self' data: https://*.google.com https://*.googleusercontent.com https://*.gstatic.com https://*.googlesyndication.com; frame-src 'self' https://*.google.com https://*.googlesyndication.com;">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        body { text-align: center; background-color: #007bff; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; padding: 20px; position: relative; }
+        h1 { color: white; margin-bottom: 20px; }
+        .container { background: white; padding: 20px; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; }
+        button { width: 100%; padding: 10px; background: #FF9800; border: none; border-radius: 5px; color: white; font-size: 16px; cursor: pointer; }
+        button:hover { background: #e68900; }
+        .logo { position: absolute; top: 10px; left: 20px; width: 120px; }
+        .flag { position: absolute; top: 10px; right: 20px; width: 40px; }
+    </style>
+    <!-- Google AdSense Script -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-XXXXXXXXXXXXXXXX", // আপনার AdSense পাবলিশার আইডি দিন
+            enable_page_level_ads: true
+        });
+    </script>
 </head>
 <body>
-    <script src="game.js"></script>
+    <img src="/mnt/data/A_professional_logo_for_'MyGames'._The_design_shou.png" alt="MyGames Logo" class="logo">
+    <img src="indian_flag.png" alt="Indian Flag" class="flag">
+    <h1>Sign Up / Login</h1>
+    <div class="container">
+        <input type="text" id="username" placeholder="Enter Username">
+        <input type="password" id="password" placeholder="Enter Password">
+        <button onclick="registerOrLogin()">Sign Up / Login</button>
+    </div>
+    
+    <script>
+        function registerOrLogin() {
+            let username = document.getElementById("username").value;
+            let password = document.getElementById("password").value;
+            if(username && password) {
+                let csvContent = `Username,Password\n${username},${password}`;
+                let blob = new Blob([csvContent], { type: "text/csv" });
+                let link = document.createElement("a");
+                link.href = URL.createObjectURL(blob);
+                link.download = "users.csv";
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                
+                // Redirect to game page
+                window.location.href = "game.html";
+            } else {
+                alert("Please enter both username and password.");
+            }
+        }
+    </script>
 </body>
 </html>
